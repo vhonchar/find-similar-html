@@ -132,4 +132,60 @@ class FindSimilarCommandTest extends Specification {
         then:
         elem.toString() == 'div > div [1] > a'
     }
+
+    def 'sample-2-container-and-clone'() {
+        given:
+        String src = '/sample-0-origin.html'
+        String dest = '/sample-2-container-and-clone.html'
+
+        when:
+        PageElement elem = command.findSimilar("make-everything-ok-button",
+                IOUtils.getResourceAsStream(src),
+                IOUtils.getResourceAsStream(dest))
+
+        then:
+        elem.toString() == 'html > body [1] > div > div [1] > div [2] > div > div > div [1] > div > a'
+    }
+
+    def 'sample-1-evil-gemini'() {
+        given:
+        String src = '/sample-0-origin.html'
+        String dest = '/sample-1-evil-gemini.html'
+
+        when:
+        PageElement elem = command.findSimilar("make-everything-ok-button",
+                IOUtils.getResourceAsStream(src),
+                IOUtils.getResourceAsStream(dest))
+
+        then:
+        elem.toString() == 'html > body [1] > div > div [1] > div [2] > div > div > div [1] > a [1]'
+    }
+
+    def 'sample-3-the-escape'() {
+        given:
+        String src = '/sample-0-origin.html'
+        String dest = '/sample-3-the-escape.html'
+
+        when:
+        PageElement elem = command.findSimilar("make-everything-ok-button",
+                IOUtils.getResourceAsStream(src),
+                IOUtils.getResourceAsStream(dest))
+
+        then:
+        elem.toString() == 'html > body [1] > div > div [1] > div [2] > div > div > div [2] > a'
+    }
+
+    def 'sample-4-the-mash'() {
+        given:
+        String src = '/sample-0-origin.html'
+        String dest = '/sample-4-the-mash.html'
+
+        when:
+        PageElement elem = command.findSimilar("make-everything-ok-button",
+                IOUtils.getResourceAsStream(src),
+                IOUtils.getResourceAsStream(dest))
+
+        then:
+        elem.toString() == 'html > body [1] > div > div [1] > div [2] > div > div > div [2] > a'
+    }
 }
